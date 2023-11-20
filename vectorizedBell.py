@@ -67,7 +67,7 @@ def noisyMeasurementZtarget(fvec, etaZA, etaZB):
 
   ## success probability
   rate = 0.5*(1. - etaZB - etaZA*(1. - 2.*etaZB))*np.sum(fvec[:,fidx], axis=1) \
-                + (etaZB + etaZA*(1. - 2.*etaZB))*np.sum(fvec[:,sidx], axis=1)
+            + 0.5*(etaZB + etaZA*(1. - 2.*etaZB))*np.sum(fvec[:,sidx], axis=1)
 
   return rate
 
@@ -77,6 +77,6 @@ def noisyMeasurementXsource(fvec, etaXA, etaXB):
 
   ## success probability
   rate = 0.5*(1. - etaXB - etaXA*(1. - 2.*etaXB))*np.sum(fvec[:,fidx], axis=1) \
-                + (etaXB + etaXA*(1. - 2.*etaXB))*np.sum(fvec[:,sidx], axis=1)
+            + 0.5*(etaXB + etaXA*(1. - 2.*etaXB))*np.sum(fvec[:,sidx], axis=1)
 
   return rate
