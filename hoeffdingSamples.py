@@ -139,7 +139,7 @@ ax.annotate(r'${\mathbf{q}}=\left({q}_1,\frac{1-{q}_1}{3},\frac{1-{q}_1}{3},\fra
     
 ## make the diagonal straight instead of jagged
 ## for cosmetic purposes only!
-ax.plot([0.5+0.0037,1+0.0037],[0.5,0], color='white', lw=3.75, ls='-')
+ax.plot([0.5+0.0040,1+0.0040],[0.5,0], color='white', lw=3.75, ls='-')
 
 ax.set_title(r'$\delta_{\mathrm{Hoeffding}} = 10^{-2},\quad\epsilon_i = 10^{-2}$',\
              y=1.025, fontsize=24)
