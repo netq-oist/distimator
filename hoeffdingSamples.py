@@ -79,6 +79,10 @@ epsxArr = np.array([1e-2,1e-2,1e-2])
 
 ## Set maximum failure probability
 delta = 1e-2
+
+#%% CALCULATE SUCCESS PROBABILITIES
+
+protProbArr = 0.5*(xVecArr**2. + (1.-xVecArr)**2.)
     
 #%% CALCULATE FOR THE TOTAL NUMBER SAMPLES
 
@@ -91,16 +95,16 @@ for k in np.arange(np.shape(xVecArr)[0]):
 ## Adjust the values, to directly compare total states
 ## consumed in distillation, and that in tomography
 
-## FOR TOMOGRAPHY
+## total consumed resources FOR TOMOGRAPHY
 tomSamples = np.float64(nHoeffdingTomography(delta, epsxArr))    
 
 ## each distillation protocol needs 2 input states;
 ## all distillation protocols have the same total number of input pairs 
-## of Bell pairs
-adjSamples = 6*samplesArr
+## of Bell pairs; total expected consumption
+adjSamples = 3*samplesArr + np.sum(samplesArr[...,None]*(1.-protProbArr), axis=1)
 
 ## display the results 
-print('Minimum number with distillation:', 3*tomSamples-min(adjSamples))
+print('Minimum number with distillation:', min(adjSamples))
 print('Minimum number with tomography:', 3*tomSamples)
 print('Maximum efficiency:', 1. - (min(adjSamples)/(3*tomSamples)))
 
@@ -158,7 +162,7 @@ cbar = fig.colorbar(sc, ticks=[vmin, vc, vmax])
 cbar.ax.set_yticklabels([r'$\leq 10^5$', \
                          r'$N_{\mathrm{tom}}\approx 3.8\times10^5$', \
                              r'$\geq 10^6$'])
-cbar.ax.set_title(r'$2N$', fontsize=32, rotation=0, y=1.02)
+cbar.ax.set_title(r'$N_{\mathrm{consumed}}$', fontsize=32, rotation=0, x=2.75, y=1.05)
 cbar.ax.tick_params(labelsize=20)
 
 fig.tight_layout() 
@@ -171,11 +175,12 @@ plt.show()
 
 qVecArr = np.hstack((q1Cx[...,None],q2Cx[...,None],q3Cx,q3Cx))
 
-result = np.hstack((qVecArr, xVecArr, samplesArr[...,None]))
+result = np.hstack((qVecArr, xVecArr, samplesArr[...,None], protProbArr, adjSamples[...,None]))
 
 np.savetxt('belldiagonal_Samples_Allepsx1e-2_Delta1e-2.txt', result, \
            delimiter='\t', newline='\n',\
-           header="qVector, xVector, number of samples")
+           header="qVector, xVector, total number of 2-copies, success probabilities, total copies consumed")
+
 
 
 
