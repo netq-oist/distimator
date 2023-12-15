@@ -14,7 +14,7 @@ import wernerEstimation as we
 import matplotlib.pyplot as plt
 plt.style.use('classic')
 
-#%% Empirical parameters
+#%% EMPIRICAL PARAMETERS
 
 # Depolarizing channel characteristic time
 TdpoA = 100.
@@ -61,7 +61,7 @@ for k in np.arange(len(wArray)):
     rateExpArr6[k] = dx.protocolExp1(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
                                      wvecArr[k,:],wvecArr[k,:],tArray6,True)  
     
-#%% Inversion    
+#%% INVERSION    
 
 wInvArr5 = np.zeros(len(wArray))    
 wInvArr6 = np.zeros(len(wArray))    
@@ -232,7 +232,7 @@ plt.savefig('werner_errors_106.png', format = 'png', dpi = 300)
 
 plt.show()
 
-#%% Hoeffding failure probability (noiseless)
+#%% HOEFFDING FAILURE PROBABILITY (NOISELESS)
 
 "Noiseless case fit"
 
@@ -244,7 +244,7 @@ deltanoise105 = 2*np.exp((-1/8.)*(10**5)*(-epsw**2. + 2.*epsw*(1.-wArrayFit))**2
 deltanoise106 = 2*np.exp((-1/8.)*(10**6)*(-epsw**2. + 2.*epsw*(1.-wArrayFit))**2.)
 
 
-#%% Hoeffding failure probability (with given noise parameters)
+#%% HOEFFDING FAILURE PROBABILITY (WITH GIVEN NOISE PARAMETERS)
 
 "Expected maximum failure probability"
 
