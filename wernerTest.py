@@ -240,8 +240,10 @@ epsw = 10.**-2
 
 wArrayFit = np.linspace(0.0,2/3.,100, False)
 
-deltanoise105 = 2*np.exp((-1/8.)*(10**5)*(-epsw**2. + 2.*epsw*(1.-wArrayFit))**2.)
-deltanoise106 = 2*np.exp((-1/8.)*(10**6)*(-epsw**2. + 2.*epsw*(1.-wArrayFit))**2.)
+deltanoise105 =   np.exp((-1/8.)*(10**5)*( epsw**2. + 2.*epsw*(1.-wArrayFit))**2.)\
+                + np.exp((-1/8.)*(10**5)*(-epsw**2. + 2.*epsw*(1.-wArrayFit))**2.)
+deltanoise106 =   np.exp((-1/8.)*(10**6)*( epsw**2. + 2.*epsw*(1.-wArrayFit))**2.)\
+                + np.exp((-1/8.)*(10**6)*(-epsw**2. + 2.*epsw*(1.-wArrayFit))**2.)
 
 
 #%% HOEFFDING FAILURE PROBABILITY (WITH GIVEN NOISE PARAMETERS)
