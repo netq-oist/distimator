@@ -7,6 +7,9 @@ via the distillation protocols (noiseless case)
 import numpy as np
 import matplotlib.pyplot as plt 
 
+from sympy.solvers import nsolve
+from sympy import Symbol, exp
+
 plt.style.use('classic')
 plt.rcParams['axes.xmargin'] = 0
 plt.rcParams['axes.ymargin'] = 0
@@ -16,20 +19,36 @@ plt.rcParams['axes.ymargin'] = 0
 " noiseless case "
 
 def sample_need_dist(delta, epsw, w):
-    a = 8. * (1./(epsw**2. + 2.*epsw*(1.-w))**2.) * np.log(2./delta)
-    return a ## counts the total number of pairs of states rho \otimes rho
+    epsL = 0.25*( -epsw**2. + 2.*epsw*(1. - w))
+    epsR = 0.25*(  epsw**2. + 2.*epsw*(1. - w))
+    
+    n = Symbol('n')
+    
+    samples = nsolve(exp(-2.*n*epsL**2.) + exp(-2.*n*epsR**2.) - delta,\
+                     n, (1e4,1e10), solver='bisect', prec=1, verify=False)
+    
+    return np.ceil(samples) 
+    ## counts the total number of pairs of states rho \otimes rho
 
 " white noise "
 
 def sample_need_dist_white(delta, epsw, w, S):
-    a = 8. * (1./S**2.) * (1./(2.*epsw*(1.-w)+epsw**2.)**2.) * np.log(2./delta)
-    return a ## counts the total number of pairs of states rho \otimes rho
+    epsL = S*0.25*( -epsw**2. + 2.*epsw*(1. - w))
+    epsR = S*0.25*(  epsw**2. + 2.*epsw*(1. - w))
+    
+    n = Symbol('n')
+    
+    samples = nsolve(exp(-2.*n*epsL**2.) + exp(-2.*n*epsR**2.) - delta,\
+                     n, (1e4,1e11), solver='bisect', prec=1, verify=False)
+    
+    return np.ceil(samples) 
+    ## counts the total number of pairs of states rho \otimes rho
 
 " tomography "
 
 def sample_need_tomography(delta, epsw):
     a = 8. * (1./((epsw)**2.)) * np.log(2./delta)
-    return a ## counts the total number of stats
+    return a ## counts the total number of states
 
 #%% Calculate the success probabilities
 
@@ -94,7 +113,7 @@ plt.tick_params(axis='x', which='major', length=8)
 plt.tick_params(axis='y', which='major', length=8)
 plt.tick_params(axis='y', which='minor', length=4.5)
 
-plt.legend(loc='upper left', fontsize = 19, ncol=3, columnspacing=1.,\
+plt.legend(loc='upper left', fontsize = 20, ncol=3, columnspacing=0.5,\
            frameon=False)
 
 plt.tight_layout()     
