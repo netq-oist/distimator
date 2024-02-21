@@ -58,7 +58,7 @@ wRange = np.linspace(0.,2/3.,1000, endpoint=False)
 ## set probability delta falling outside p^{(1)} threshold
 delta = 0.01
 
-## set value for the average depolarization S
+## set value for the average depolarization 1-S
 S = np.exp(-1/4.)
 
 " noiseless distillation "
