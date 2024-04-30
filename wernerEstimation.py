@@ -31,8 +31,8 @@ def invertWernerParamI(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
 
   # count iterations
   i = 0
-  # set bisection tolerance to be 0.01epsw^2
-  epsbis = 0.01*epsw**2.
+  # set bisection tolerance to be epsw^3
+  epsbis = epsw**3.
   # convergence test, i must be at most nLim
   nLim = np.ceil(np.log2((wR - wL)/epsbis))
 
