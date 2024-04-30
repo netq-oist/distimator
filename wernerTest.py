@@ -178,7 +178,7 @@ axinset.tick_params(axis='x', labelsize=12.5)
 axinset.set_xlim([0.6- 2/3.,2/3.])
 axinset.set_ylim([-0.025,0.025])
 
-plt.savefig('werner_errors_105.png', format = 'png', dpi = 300)
+plt.savefig('werner_errors_105.pdf', format = 'pdf', dpi = 300)
 
 plt.show()
 
@@ -228,7 +228,7 @@ axinset.tick_params(axis='x', labelsize=12.5)
 axinset.set_xlim([0.6- 2/3.,2/3.])
 axinset.set_ylim([-0.025,0.025])
 
-plt.savefig('werner_errors_106.png', format = 'png', dpi = 300)
+plt.savefig('werner_errors_106.pdf', format = 'pdf', dpi = 300)
 
 plt.show()
 
@@ -324,7 +324,7 @@ ax.scatter(wArray, np.log10(deltaRate5), marker='o', \
 ax.plot(wArrayFit, np.log10(deltanoise105), ls='-',color='darkorange', lw=1.75)
 ax.plot(wArrayFit, np.log10(deltaRateExpected105), ls='--',color='darkorange', lw=1.75)
     
-ax.scatter(wArray, np.log10(deltaRate6), marker='o', \
+ax.scatter(wArray, np.log10(deltaRate6), marker='d', \
            label=r'$N^{(1)} = 10^{6}$', color='darkblue', s=32)
     
 ax.plot(wArrayFit, np.log10(deltanoise106), ls='-',color='darkblue', lw=1.75)
@@ -349,7 +349,7 @@ ax.tick_params(axis='y', which='minor', length=4.5)
 
 fig.tight_layout() 
 
-plt.savefig('werner_failure_probability_withref.png', format = 'png', dpi = 300)
+plt.savefig('werner_failure_probability_withref.pdf', format = 'pdf', dpi = 300)
 
 plt.show()
 
