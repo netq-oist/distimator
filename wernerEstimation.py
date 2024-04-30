@@ -31,8 +31,10 @@ def invertWernerParamI(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
 
   # count iterations
   i = 0
+  # set bisection tolerance to be 10^-2 x epsw
+  epsbis = (1e-2)*epsw
   # convergence test, i must be at most nLim
-  nLim = np.ceil(np.log2((wR - wL)/epsw))
+  nLim = np.ceil(np.log2((wR - wL)/epsbis))
 
   ## BISECTION SEARCH
   while i <= nLim:
@@ -46,7 +48,7 @@ def invertWernerParamI(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
     rateM = dx.protocolExp1(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
                          wMvec,wMvec,tArray,False)
 
-    if np.isclose(rateM, rateExp) or (wR - wL) <= epsw:
+    if np.isclose(rateM, rateExp) or (wR - wL)/2 <= epsbis:
       break
 
     ## Change the boundaries
@@ -60,40 +62,4 @@ def invertWernerParamI(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
     i += 1
     
   return wM
-
-""""""""""""
-
-"BISECTION METHOD II"
-
-""""""""""""
-
-# Define the inversion strategy for the Werner parameter
-# when precision on p is instead fixed.
-# We consider the FIRST distillation protocol for this estimation
-
-def invertWernerParamII(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
-                        tArray,rateExp,epsp):
-    
-    # Search precision:
-    # Using a bisection search when epsw is unknown
-    # Typically, epsp = O(epsw). 
-    # So, as a rule of thumb, we take epsw_bis = 10**-2 epsp
-    # as precision of the search algorithm
-    epsw = epsp*10.**(-2)
-    
-    wM = invertWernerParamI(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
-                            tArray,rateExp,epsw)
-        
-    wL = invertWernerParamI(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
-                            tArray,rateExp-epsp,epsw)
-        
-    wR = invertWernerParamI(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
-                            tArray,rateExp+epsp,epsw)
-
-    return wM, wR, wL
-    
-
-
-
-
-
+                         
