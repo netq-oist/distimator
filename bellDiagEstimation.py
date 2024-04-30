@@ -33,8 +33,10 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
     
     # count iterations
     x1i = 0
+    # set bisection tolerance to be 10^-2 x epsx
+    epsbis1 = (1e-2)*epsxArr[0]
     # convergence test, total step must be at most nLim1
-    nLim1 = np.ceil(np.log2((x1R - x1L)/epsxArr[0]))
+    nLim1 = np.ceil(np.log2((x1R - x1L)/epsbis1))
     
     ## BISECTION SEARCH
     while x1i <= nLim1:
@@ -54,7 +56,7 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
         p1M = dx.protocolExp1(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaZA,etaZB,\
                               x1Mvec,x1Mvec,tArr1,False)
             
-        if np.isclose(p1M, pExpArr[0]) or (x1R - x1L) <= epsxArr[0]:
+        if np.isclose(p1M, pExpArr[0]) or (x1R - x1L)/2 <= epsbis1:
             break
         
         ## Change the boundaries
@@ -74,8 +76,10 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
     
     # count iterations
     x2i = 0
+    # set bisection tolerance to be 10^-2 x epsx
+    epsbis2 = (1e-2)*epsxArr[1]
     # convergence test, total steps must be at most nLim2
-    nLim2 = np.ceil(np.log2((x2R - x2L)/epsxArr[1]))
+    nLim2 = np.ceil(np.log2((x2R - x2L)/epsbis2))
     
     ## BISECTION SEARCH
     while x2i <= nLim2:
@@ -95,7 +99,7 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
         p2M = dx.protocolExp2(TdpoA,TdphA,TdpoB,TdphB,yA,yB,etaXA,etaXB,\
                               x2Mvec,x2Mvec,tArr2,False)
             
-        if np.isclose(p2M, pExpArr[1]) or (x2R - x2L) <= epsxArr[1]:
+        if np.isclose(p2M, pExpArr[1]) or (x2R - x2L)/2 <= epsbis2:
             break
         
         ## Change the boundaries
@@ -115,8 +119,10 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
     
     # count iterations
     x3i = 0
+    # set bisection tolerance to be 10^-2 x epsx
+    epsbis3 = (1e-2)*epsxArr[2]
     # convergence test, total steps must be at most nLim3
-    nLim3 = np.ceil(np.log2((x3R - x3L)/epsxArr[2]))
+    nLim3 = np.ceil(np.log2((x3R - x3L)/epsbis3))
     
     ## BISECTION SEARCH
     while x3i <= nLim3:
@@ -136,7 +142,7 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
         p3M = dx.protocolExp3(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
                               x3Mvec,x3Mvec,tArr3,False)
             
-        if np.isclose(p3M, pExpArr[2]) or (x3R - x3L) <= epsxArr[2]:
+        if np.isclose(p3M, pExpArr[2]) or (x3R - x3L)/2 <= epsbis3:
             break
         
         ## Change the boundaries
