@@ -33,8 +33,8 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
     
     # count iterations
     x1i = 0
-    # set bisection tolerance to be 10^-2 x epsx
-    epsbis1 = (1e-2)*epsxArr[0]
+    # set bisection tolerance to be epsx^3
+    epsbis1 = epsxArr[0]**3.
     # convergence test, total step must be at most nLim1
     nLim1 = np.ceil(np.log2((x1R - x1L)/epsbis1))
     
@@ -76,8 +76,8 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
     
     # count iterations
     x2i = 0
-    # set bisection tolerance to be 10^-2 x epsx
-    epsbis2 = (1e-2)*epsxArr[1]
+    # set bisection tolerance to be epsx^3
+    epsbis2 = epsxArr[1]**3.
     # convergence test, total steps must be at most nLim2
     nLim2 = np.ceil(np.log2((x2R - x2L)/epsbis2))
     
@@ -119,8 +119,8 @@ def invertBellProtocolI(TdpoA,TdphA,TdpoB,TdphB,mA,mB,yA,yB,etaZA,etaZB,\
     
     # count iterations
     x3i = 0
-    # set bisection tolerance to be 10^-2 x epsx
-    epsbis3 = (1e-2)*epsxArr[2]
+    # set bisection tolerance to be epsx^3
+    epsbis3 = epsxArr[2]**3.
     # convergence test, total steps must be at most nLim3
     nLim3 = np.ceil(np.log2((x3R - x3L)/epsbis3))
     
