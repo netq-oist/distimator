@@ -125,7 +125,8 @@ fig, ax = plt.subplots()
 ax.set(aspect=1.0)
 
 norm = pltco.TwoSlopeNorm(vmin=0.0, vcenter=np.sum(epsxArr), vmax=0.07)
-cmap = pltco.LinearSegmentedColormap.from_list("", ["blue","yellow","red"])
+#cmap = pltco.LinearSegmentedColormap.from_list("", ["blue","yellow","red"])
+cmap = 'bwr'
 
 sc = ax.scatter(q1Cx, q2Cx, c=trDistArr, s=25, marker='s', edgecolors='none',\
                 cmap=cmap, norm=norm)
@@ -161,7 +162,7 @@ cbar.ax.set_yscale('linear')
 
 fig.tight_layout() 
 
-plt.savefig('distillation-bell-one-norm-distance.png', format = 'png', dpi = 300)
+plt.savefig('distillation-bell-one-norm-distance-bwr.pdf', format = 'pdf', dpi = 300)
 
 plt.show()
 
@@ -234,7 +235,8 @@ fig, ax = plt.subplots()
 ax.set(aspect=1.0)
 
 norm = pltco.TwoSlopeNorm(vmin=-9, vcenter=-2, vmax=0.)
-cmap = pltco.LinearSegmentedColormap.from_list("", ["blue","yellow","red"])
+#cmap = pltco.LinearSegmentedColormap.from_list("", ["blue","yellow","red"])
+cmap = 'bwr'
 
 sc = ax.scatter(q1Cx, q2Cx, c=np.log10(deltaHoeffdingArr), s=25, marker='s', \
                 edgecolors='none',\
@@ -274,7 +276,7 @@ cbar.ax.set_yscale('linear')
 
 fig.tight_layout() 
 
-plt.savefig('distillation-bell-failure-prob.png', format = 'png', dpi = 300)
+plt.savefig('distillation-bell-failure-prob-bwr.pdf', format = 'pdf', dpi = 300)
 
 plt.show()
 
