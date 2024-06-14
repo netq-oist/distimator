@@ -124,7 +124,7 @@ fig, ax = plt.subplots()
 ax.set(aspect=1.0)
 
 norm = pltco.TwoSlopeNorm(vmin=vmin,vcenter=vc,vmax=vmax)
-cmap = pltco.LinearSegmentedColormap.from_list("", ["blue","yellow","red"])
+cmap = 'bwr'
 
 sc = ax.scatter(q1Cx, q2Cx, c=adjSamples, s=25, marker='s', \
                 edgecolors='none',\
@@ -141,7 +141,7 @@ ax.annotate(r'${\mathbf{q}}=\left({q}_1,\frac{1-{q}_1}{3},\frac{1-{q}_1}{3},\fra
 ## for cosmetic purposes only!
 ax.plot([0.5+0.00475,1+0.00475],[0.5,0], color='white', lw=3.75, ls='-')
 
-ax.set_title(r'$\delta_{\mathrm{Hoeffding}} = 10^{-2},\quad\epsilon_i = 10^{-2}$',\
+ax.set_title(r'$\delta = 10^{-2},\quad\epsilon_i = 10^{-2}$',\
              y=1.025, fontsize=24)
 
 ax.set_xlim([0.5,1.0])
@@ -160,14 +160,14 @@ ax.annotate(r'${q}_3 = {q}_4 = \frac{1-{q}_1-{q}_2}{2}$', \
 
 cbar = fig.colorbar(sc, ticks=[vmin, vc, vmax])
 cbar.ax.set_yticklabels([r'$\leq 10^5$', \
-                         r'$N_{\mathrm{tom}}\approx 3.8\times10^5$', \
+                         r'$N_{\mathrm{tom}}\approx 3.84\times10^5$', \
                              r'$\geq 10^6$'])
 cbar.ax.set_title(r'$N_{\mathrm{consumed}}$', fontsize=32, rotation=0, x=2.75, y=1.05)
 cbar.ax.tick_params(labelsize=20)
 
 fig.tight_layout() 
 
-plt.savefig('belldiagonal_samples.png', format = 'png', dpi = 300)
+plt.savefig('belldiagonal_samples-bwr.pdf', format = 'pdf', dpi = 300)
 
 plt.show()
 
